@@ -1,6 +1,7 @@
 using DataAccess.DAO;
 using DataAccess.DAOImpl;
 using DataAccess.DbContext;
+using DataAccess.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<ICategory, CategoryImpl>();
 builder.Services.AddScoped<ICategory, CategoryImpl>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddDbContext<StoreDbContext>(p => p.UseSqlServer(builder.Configuration.GetConnectionString("Store")));
 var app = builder.Build();
 

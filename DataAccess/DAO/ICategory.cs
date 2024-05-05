@@ -13,6 +13,7 @@ namespace DataAccess.DAO
         int Edit(Category category);
 
         int Delete(int id);
+        int Create(Category category);
         List<Category> GetCategories();
         Category GetCategory(int Id);
     }

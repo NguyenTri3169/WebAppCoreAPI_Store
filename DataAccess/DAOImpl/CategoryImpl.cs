@@ -22,6 +22,12 @@ namespace DataAccess.DAOImpl
             throw new NotImplementedException();
         }
 
+        public int Create(Category category)
+        {
+            _storeDbContext.categories.Add(category);
+            return 1;
+        }
+
         public int Delete(int id)
         {
             throw new NotImplementedException();
