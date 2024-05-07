@@ -16,5 +16,6 @@ namespace DataAccess.DbContext
 
         }
         public DbSet<Category> categories { get; set; } = null!;
+        public DbSet<Users> users { get; set; } = null!;    
     }
 }

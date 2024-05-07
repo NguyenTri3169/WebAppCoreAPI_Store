@@ -36,7 +36,7 @@ namespace CommonLibs
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
         public static async Task<string> SendGet(string url, string baseUrl)
@@ -65,7 +65,7 @@ namespace CommonLibs
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
 
