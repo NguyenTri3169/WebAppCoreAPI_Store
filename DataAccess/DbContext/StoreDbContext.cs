@@ -15,7 +15,8 @@ namespace DataAccess.DbContext
         {
 
         }
-        public DbSet<Category> categories { get; set; } = null!;
-        public DbSet<Users> users { get; set; } = null!;    
+        public DbSet<Category> categories { get; set; }
+        public DbSet<Users> users { get; set; }
+        //public IEnumerable<object> Users { get; internal set; }
     }
 }

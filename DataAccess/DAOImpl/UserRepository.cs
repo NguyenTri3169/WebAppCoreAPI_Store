@@ -11,22 +11,24 @@ namespace DataAccess.DAOImpl
 {
     public class UserRepository : IUserRepository
     {
-        private readonly StoreDbContext _storeDbContext = null!;
+        private StoreDbContext _storeDbContext;
         public UserRepository(StoreDbContext storeDbContext)
         {
             _storeDbContext = storeDbContext;
-        }   
-        public Task<int> Login(UserLogin_RequestData requestData)
+        }
+        public async Task<Users> Login(UserLogin_RequestData requestData)
         {
+            var user = new Users();
             try
             {
-                
+                user = _storeDbContext.users.Where(x => x.UserName == requestData.UserName && x.UserPass == requestData.UserPass)
+                    .FirstOrDefault();
             }
             catch (Exception EX)
             {
-
-                throw ex;
+                throw; // rethrow the exception without modifying it
             }
+            return user;
         }
     }
 }

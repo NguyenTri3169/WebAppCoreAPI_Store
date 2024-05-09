@@ -9,6 +9,6 @@ namespace DataAccess.DAO
 {
     public interface IUserRepository
     {
-        Task <int> Login(UserLogin_RequestData requestData);    
+        Task <Users> Login(UserLogin_RequestData requestData);    
     }
 }
