@@ -20,7 +20,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["Jwt:ValidIssuer"],
         ValidAudience = builder.Configuration["Jwt:ValidAudience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"] = null!))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"]))
     };
 });
 
@@ -32,7 +32,9 @@ builder.Services.AddTransient<ICategory, CategoryImpl>();
 builder.Services.AddScoped<ICategory, CategoryImpl>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddDbContext<StoreDbContext>(p => p.UseSqlServer(builder.Configuration.GetConnectionString("Store")));
+builder.Services.AddDbContext<StoreDbContext>(p => p.UseSqlServer
+(builder.Configuration.GetConnectionString("Store")));
+builder.Services.AddTransient<IUserRepository, UserRepository>();   
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

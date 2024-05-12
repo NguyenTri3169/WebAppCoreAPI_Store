@@ -12,10 +12,13 @@ namespace DataAccess.UnitOfWork
     {
         StoreDbContext _storeDbContext = null!;
         public ICategory _category { get; set; } = null!;
-        public UnitOfWork(StoreDbContext storeDbContext, ICategory category)
+        public IUserRepository _userRepository { get; set; }
+
+        public UnitOfWork(StoreDbContext storeDbContext, ICategory category, IUserRepository userRepository)
         {
             _storeDbContext = storeDbContext;
             _category = category;
+            _userRepository = userRepository;
         }
 
         public int SaveChange()

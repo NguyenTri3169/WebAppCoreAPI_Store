@@ -30,5 +30,27 @@ namespace DataAccess.DAOImpl
             }
             return user;
         }
+
+        public async Task<int> UpdateRefreshTokenExpired(UpdateRefreshTokenExpired_RequestData requestData)
+        {
+            var result = 0;
+            try
+            {
+                var user = _storeDbContext.users.Where(x => x.UserId == requestData.UserId)
+                    .FirstOrDefault();
+                if (user != null && user.UserId > 0)
+                {
+                    user.RefreshToken = requestData.RefreshToken;
+                    user.RefreshTokenExpired = requestData.RefreshTokenExpired;
+                    _storeDbContext.Update(user);
+                }
+                return result = 1;
+            }
+            catch (Exception EX)
+            {
+
+                return result = -99;
+            }
+        }
     }
 }

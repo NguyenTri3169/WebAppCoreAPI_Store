@@ -10,5 +10,6 @@ namespace DataAccess.DAO
     public interface IUserRepository
     {
         Task <Users> Login(UserLogin_RequestData requestData);    
+        Task<int> UpdateRefreshTokenExpired(UpdateRefreshTokenExpired_RequestData requestData);
     }
 }
