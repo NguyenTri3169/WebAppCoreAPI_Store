@@ -9,26 +9,32 @@ namespace WebAppCoreAPI.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        //private readonly ICategory _category;
-        private IUnitOfWork _unitOfWork = null!;   
-        public CategoryController(/*ICategory category*/ IUnitOfWork unitOfWork)
-        {
-            //_category = category;
-            _unitOfWork = unitOfWork;   
-        }
-        [HttpPost("GetCategories")]
-        public List<Category> GetCategories()
-        {
+        private IUnitOfWork _unitOfWork = null!;
 
-            //return _category.GetCategories();
-            return _unitOfWork._category.GetCategories();
+        public CategoryController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
         }
+
+        [HttpGet("GetCategories")]
+        public List<string> GetCategoryNames()
+        {
+            List<Category> categories = _unitOfWork.CategoryRepository.GetCategories();
+            List<Product> products = _unitOfWork.ProductRepository.GetProducts();
+
+            List<string> names = categories.Select(c => c.Name).ToList();
+            List<string> productNames = products.Select(p => p.Name).ToList();
+
+            names.AddRange(productNames);
+
+            return names;
+        }
+
         [HttpGet("CreateCategories")]
         public int CreateCategories(Category category)
         {
-            //return _category.Create(category);
-            _unitOfWork._category.Create(category);
+            _unitOfWork.CategoryRepository.Create(category);
             return _unitOfWork.SaveChange();
-        }   
+        }
     }
 }
